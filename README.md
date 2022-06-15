@@ -22,3 +22,6 @@ To run PQL:
 ```bash
 python src/run_ql.py --state_clipping=1 --threshold=0.01
 ```
+
+### Acknowledgements
+The code is an adaptation of the BCQ official [implementation](https://github.com/sfujim/BCQ).
