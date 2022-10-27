@@ -25,3 +25,8 @@ python src/run_ql.py --state_clipping=1 --threshold=0.01
 
 ### Acknowledgements
 The code is an adaptation of the BCQ official [implementation](https://github.com/sfujim/BCQ).
+
+This is code for the paper Offline Policy Optimization with Eligible Actions 
+https://arxiv.org/abs/2207.00632
+Yao Liu, Yannis Flet-Berliac, and Emma Brunskill 
+Conference on Uncertainty in AI (UAI) 2022
