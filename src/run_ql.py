@@ -197,6 +197,31 @@ if __name__ == "__main__":
         "vmin": -30,
     }
 
+    cartpole_parameters = {
+        "hidden_dim": 256,
+        "eval_freq": 5000,
+        "discount": 0.99,
+        "buffer_size": 57730,
+        "batch_size": 64,
+        "optimizer": "Adam",
+        "optimizer_parameters": {
+            "lr": 3e-4,
+        },
+        "polyak_target_update": True,
+        "target_update_freq": 1,
+        "tau": 0.005,
+
+        "state_clipping": False,
+        "density_estm": "vae",  # vae, nn_action_dist
+        "log_pibs": True,
+        "beta_percentile": 2.0,  # clip how many samples with vae
+
+        # Domain parameter
+        "horizon": 200,
+        "max_state": [2.46064, 3.4536839, 0.24977918, 2.70027],
+        "vmin": 0,
+    }
+
     # Load parameters
     parser = argparse.ArgumentParser()
     parser.add_argument("--env", default="mimic_sepsis")
@@ -247,6 +272,13 @@ if __name__ == "__main__":
 
         experiment_name += args.env
         parameters["buffer_name"] = "./data/" + args.env
+    elif args.env == "cartpole":
+        state_dim = 4
+        num_actions = 2
+        parameters = cartpole_parameters
+
+        experiment_name += "cartpole"
+        parameters["buffer_name"] = "./data/cartpole"
     else:
         raise NotImplementedError
 

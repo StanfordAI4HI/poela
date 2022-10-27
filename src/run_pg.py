@@ -164,6 +164,33 @@ if __name__ == "__main__":
         "save_f_name": "PG_mimic45"
     }
 
+    cartpole_parameters = {
+        # Learning
+        "horizon": 200,
+        "discount": 1,
+        "buffer_size": 744,
+        "batch_size": 744,
+        "bc_batch_size": 100,
+        "hidden_dim": 256,
+        "optimizer": "Adam",
+        "optimizer_parameters": {
+            "lr": 3e-4,
+            "weight_decay": 1e-3,
+        },
+        "bc_steps": 500,
+        "eval_freq": 100,
+        "var_coeff": 0.01,
+        "step_average": False,
+        "threshold": 0.0001,
+        "using_cv": False,
+        "cv_type": "const_mean",  # const, const_mean, behavior_q, target_q
+        "traj_clipping": True,
+        "action_mask_type": "nn_action_dist",  # step, trajectory, nn_action_dist
+        "self_normalized": True,
+
+        "save_f_name": "PG_cartpole"
+    }
+
     # Load parameters
     parser = argparse.ArgumentParser()
     parser.add_argument("--env", default="mimic_sepsis")
@@ -210,6 +237,13 @@ if __name__ == "__main__":
 
         experiment_name = "PG_" + args.env
         parameters["buffer_name"] = "./data/" + args.env
+    elif args.env == "cartpole":
+        state_dim = 3 #todo 4
+        num_actions = 2
+        parameters = cartpole_parameters
+
+        experiment_name = "2102/PG_cartpole"
+        parameters["buffer_name"] = "./data/cartpole"
     else:
         raise NotImplementedError
 
